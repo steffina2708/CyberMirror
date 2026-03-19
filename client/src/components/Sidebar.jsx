@@ -61,16 +61,6 @@ const Sidebar = () => {
           <span>◈</span> Leaderboard
         </NavLink>
 
-        {/* ── Multiplayer ───────────────────────────── */}
-        <NavLink to="/multiplayer" className={({ isActive }) => `sidebar-nav-link${isActive ? ' active' : ''}`}>
-          <span>⚔️</span> Multiplayer Battle
-        </NavLink>
-
-        {/* ── Tournaments ──────────────────────────── */}
-        <NavLink to="/tournaments" className={({ isActive }) => `sidebar-nav-link${isActive ? ' active' : ''}`}>
-          <span>🏆</span> Tournaments
-        </NavLink>
-
         {/* ── Cyber Games ──────────────────────────── */}
         <button
           className={`sidebar-nav-link sidebar-section-header${gamesOpen ? ' section-open' : ''}${location.pathname.startsWith('/cyber-games') ? ' active' : ''}`}

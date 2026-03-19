@@ -62,6 +62,7 @@ userSchema.virtual('winRate').get(function () {
   return Math.round((this.correctAnswers / this.totalAnswers) * 100);
 });
 
-userSchema.set('toJSON', { virtuals: true });
+// Disable virtuals in JSON serialization to avoid property descriptor conflicts
+userSchema.set('toJSON', { virtuals: false });
 
 module.exports = mongoose.model('User', userSchema);

@@ -21,8 +21,6 @@ import HackerSimulator from './pages/labs/HackerSimulator';
 import DigitalForensicsLab from './pages/labs/DigitalForensicsLab';
 import NetworkDefensePuzzle from './pages/labs/NetworkDefensePuzzle';
 import BattleArena from './pages/games/BattleArena';
-import MultiplayerBattle from './pages/MultiplayerBattle';
-import Tournaments from './pages/Tournaments';
 
 const PrivateRoute = ({ children }) => {
 	const { user } = useAuth();
@@ -57,8 +55,6 @@ const AppRoutes = () => {
 			<Route path="/cyber-labs/digital-forensics" element={<PrivateRoute><DigitalForensicsLab /></PrivateRoute>} />
 			<Route path="/cyber-labs/network-defense-puzzle" element={<PrivateRoute><NetworkDefensePuzzle /></PrivateRoute>} />
 			<Route path="/cyber-games/battle-arena" element={<PrivateRoute><BattleArena /></PrivateRoute>} />
-			<Route path="/multiplayer" element={<PrivateRoute><MultiplayerBattle /></PrivateRoute>} />
-			<Route path="/tournaments" element={<PrivateRoute><Tournaments /></PrivateRoute>} />
 			<Route path="*" element={<Navigate to="/" replace />} />
 		</Routes>
 	);

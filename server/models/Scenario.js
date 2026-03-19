@@ -66,6 +66,6 @@ scenarioSchema.virtual('totalPoints').get(function () {
   }, 0);
 });
 
-scenarioSchema.set('toJSON', { virtuals: true });
+scenarioSchema.set('toJSON', { virtuals: false });
 
 module.exports = mongoose.model('Scenario', scenarioSchema);
