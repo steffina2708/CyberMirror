@@ -60,6 +60,9 @@ const Sidebar = () => {
         <NavLink to="/leaderboard" className={({ isActive }) => `sidebar-nav-link${isActive ? ' active' : ''}`}>
           <span>◈</span> Leaderboard
         </NavLink>
+        <NavLink to="/scenarios" className={({ isActive }) => `sidebar-nav-link${isActive ? ' active' : ''}`}>
+          <span>🎯</span> Attack Scenarios
+        </NavLink>
 
         {/* ── Cyber Games ──────────────────────────── */}
         <button

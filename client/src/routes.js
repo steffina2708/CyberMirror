@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Scenarios from './pages/Scenarios';
 import Simulation from './pages/Simulation';
 import Results from './pages/Results';
 import Leaderboard from './pages/Leaderboard';
@@ -39,6 +40,7 @@ const AppRoutes = () => {
 			<Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
 			<Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 			<Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+			<Route path="/scenarios" element={<PrivateRoute><Scenarios /></PrivateRoute>} />
 			<Route path="/simulation/:id" element={<PrivateRoute><Simulation /></PrivateRoute>} />
 			<Route path="/results/:sessionId" element={<PrivateRoute><Results /></PrivateRoute>} />
 			<Route path="/leaderboard" element={<PrivateRoute><Leaderboard /></PrivateRoute>} />

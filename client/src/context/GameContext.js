@@ -90,7 +90,7 @@ export const GameProvider = ({ children }) => {
         console.error('XP award failed:', e);
       }
     }
-  }, [activeGame, gameScore, updateUser]);
+  }, [activeGame, gameScore, user?.level, updateUser]);
 
   const clearGamification = useCallback(() => {
     setPendingBadges([]);
@@ -101,6 +101,7 @@ export const GameProvider = ({ children }) => {
     setNewRankName('');
     setPrevRankName('');
   }, []);
+
 
   return (
     <GameContext.Provider value={{

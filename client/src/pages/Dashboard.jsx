@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import SimulationCard from '../components/SimulationCard';
 import { ThreatMonitor, TerminalText, CyberParticles } from '../components/CyberEffects';
 import RadarScanner from '../components/RadarScanner';
 import IntrusionAlert from '../components/IntrusionAlert';
@@ -21,11 +20,9 @@ import '../styles/dashboard.css';
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [scenarios, setScenarios] = useState([]);
   const [history, setHistory] = useState([]);
   const [performance, setPerformance] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all');
   const [aiLoading, setAiLoading]     = useState(false);
   const [aiError,   setAiError]       = useState(null);
   const [aiCategory, setAiCategory]   = useState('mixed');
@@ -33,12 +30,10 @@ const Dashboard = () => {
   useEffect(() => {
     const load = async () => {
       try {
-        const [sc, hist, perf] = await Promise.all([
-          simulationService.getAllScenarios(),
+        const [hist, perf] = await Promise.all([
           simulationService.getUserHistory(),
           scoreService.getPerformance(),
         ]);
-        setScenarios(sc.scenarios || []);
         setHistory(hist.history || []);
         setPerformance(perf);
       } catch (e) {
@@ -49,11 +44,6 @@ const Dashboard = () => {
     };
     load();
   }, []);
-
-  const filtered = filter === 'all' ? scenarios : scenarios.filter(s => s.difficulty === filter);
-
-  // Which difficulty levels have at least one loaded scenario
-  const available = new Set(scenarios.map(s => s.difficulty));
 
   const handleAIChallenge = async () => {
     setAiLoading(true);
@@ -261,43 +251,6 @@ const Dashboard = () => {
 
         {/* 3D Cyber Threat Globe */}
         <ThreatGlobe />
-
-        {/* Scenarios */}
-        <div className="section-title" style={{ marginBottom: 16 }}>
-          Attack Scenarios
-        </div>
-
-        {/* Filter pills */}
-        <div className="filter-pills">
-          {['all', 'easy', 'medium', 'hard', 'expert'].map(d => {
-            const hasScenarios = d === 'all' || available.has(d);
-            const active = filter === d;
-            return (
-              <button
-                key={d}
-                onClick={() => hasScenarios && setFilter(d)}
-                disabled={!hasScenarios}
-                className={`filter-pill${active ? ' active' : ''}${!hasScenarios ? ' disabled' : ''}`}
-              >
-                {d}
-              </button>
-            );
-          })}
-        </div>
-
-        {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-dim)', padding: 40 }}>
-            Loading scenarios...
-          </div>
-        ) : filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-dim)', padding: 40 }}>
-            No scenarios found. Check back later.
-          </div>
-        ) : (
-          <div className="scenarios-grid" style={{ marginBottom: 40 }}>
-            {filtered.map(s => <SimulationCard key={s._id} scenario={s} />)}
-          </div>
-        )}
 
         {/* Recent History */}
         {history.length > 0 && (
