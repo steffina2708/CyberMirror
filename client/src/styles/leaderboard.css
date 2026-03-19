@@ -1,0 +1,467 @@
+/* ═══════════════════════════════════════════════════════════════════
+   CYBER ARENA LEADERBOARD — Unique animations (leaderboard only)
+   None of these classes appear on Dashboard, Profile, or other pages.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── STEP 1-2: Data rain background ──────────────────────────────
+   Scoped to .leaderboard-page so it NEVER fires elsewhere.         */
+.leaderboard-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.leaderboard-page::before {
+  content: '';
+  position: fixed;
+  left: 260px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 10%, transparent) 0px,
+    transparent 2px
+  );
+  background-size: 100% 40px;
+  animation: dataRain 10s linear infinite;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  will-change: background-position;
+}
+
+@keyframes dataRain {
+  0%   { background-position: 0 -40px; }
+  100% { background-position: 0  40px; }
+}
+
+/* ── STEP 2: Top 3 champion row highlights ───────────────────── */
+.leaderboard-page .lb-row.rank-1 {
+  border-bottom: 1px solid rgba(255, 215, 0, 0.50) !important;
+  box-shadow: inset 0 0 28px rgba(255, 215, 0, 0.07), 0 0 18px rgba(255, 215, 0, 0.14);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.06) 0%,
+    transparent 55%
+  ) !important;
+  animation: rankRise 0.45s ease forwards, championGlow 2.5s ease-in-out 0.45s infinite;
+}
+
+.leaderboard-page .lb-row.rank-2 {
+  border-bottom: 1px solid rgba(192, 192, 192, 0.40) !important;
+  box-shadow: inset 0 0 18px rgba(192, 192, 192, 0.06), 0 0 12px rgba(192, 192, 192, 0.10);
+  background: linear-gradient(
+    90deg,
+    rgba(192, 192, 192, 0.05) 0%,
+    transparent 55%
+  ) !important;
+}
+
+.leaderboard-page .lb-row.rank-3 {
+  border-bottom: 1px solid rgba(205, 127, 50, 0.40) !important;
+  box-shadow: inset 0 0 14px rgba(205, 127, 50, 0.06), 0 0 10px rgba(205, 127, 50, 0.09);
+  background: linear-gradient(
+    90deg,
+    rgba(205, 127, 50, 0.05) 0%,
+    transparent 55%
+  ) !important;
+}
+
+@keyframes championGlow {
+  0%, 100% { box-shadow: inset 0 0 28px rgba(255, 215, 0, 0.07), 0 0 18px rgba(255, 215, 0, 0.14); }
+  50%       { box-shadow: inset 0 0 40px rgba(255, 215, 0, 0.14), 0 0 34px rgba(255, 215, 0, 0.28); }
+}
+
+/* ── STEP 3: Trophy animation for 1st place ──────────────────── */
+.trophy-icon {
+  display: inline-block;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 0 7px rgba(255, 215, 0, 0.85));
+  animation: trophyPulse 2.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes trophyPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.22); }
+}
+
+/* ── STEP 4: Rank rise entrance (staggered) ──────────────────── */
+.leaderboard-page .lb-row {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rankRise 0.45s ease forwards;
+}
+
+@keyframes rankRise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.leaderboard-page .lb-row:nth-child(1)    { animation-delay: 0.05s; }
+.leaderboard-page .lb-row:nth-child(2)    { animation-delay: 0.10s; }
+.leaderboard-page .lb-row:nth-child(3)    { animation-delay: 0.15s; }
+.leaderboard-page .lb-row:nth-child(4)    { animation-delay: 0.20s; }
+.leaderboard-page .lb-row:nth-child(5)    { animation-delay: 0.25s; }
+.leaderboard-page .lb-row:nth-child(6)    { animation-delay: 0.30s; }
+.leaderboard-page .lb-row:nth-child(7)    { animation-delay: 0.35s; }
+.leaderboard-page .lb-row:nth-child(8)    { animation-delay: 0.40s; }
+.leaderboard-page .lb-row:nth-child(9)    { animation-delay: 0.45s; }
+.leaderboard-page .lb-row:nth-child(10)   { animation-delay: 0.50s; }
+.leaderboard-page .lb-row:nth-child(n+11) { animation-delay: 0.55s; }
+
+/* ── STEP 5: Current user energy pulse ───────────────────────── */
+.leaderboard-page .lb-row.current-user {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent) !important;
+  border-radius: 6px;
+}
+
+.leaderboard-page .lb-row.current-user::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  animation: userPulse 1.8s ease-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes userPulse {
+  0%   { opacity: 0.85; transform: scale(1);    }
+  100% { opacity: 0;    transform: scale(1.035); }
+}
+
+/* ── STEP 6: Score glow ──────────────────────────────────────── */
+.leaderboard-page .lb-score {
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--accent-glow), 0 0 18px var(--accent-glow);
+}
+
+/* ── STEP 7: Cyber row hover ─────────────────────────────────── */
+.leaderboard-page .lb-row:hover {
+  transform: translateX(6px) translateY(0) !important;
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--accent) 28%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--accent) 5%, transparent) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* ── STEP 8: Cyber arena header ──────────────────────────────── */
+.leaderboard-title {
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientMove 6s ease infinite, titleGlow 5s ease-in-out infinite;
+  margin: 0;
+}
+
+@keyframes titleGlow {
+  0%, 100% { filter: brightness(1);    }
+  50%       { filter: brightness(1.35); }
+}
+
+.lb-arena-label {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.lb-arena-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 7px;
+}
+
+.lb-arena-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  flex-shrink: 0;
+  animation: arenaDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes arenaDotPulse {
+  0%, 100% { box-shadow: 0 0 4px #22c55e; }
+  50%       { box-shadow: 0 0 12px #22c55e, 0 0 24px #22c55e55; }
+}
+
+.lb-arena-status-text {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.lb-arena-status-text strong { color: #22c55e; }
+
+/* ── STEP 9: Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .leaderboard-page::before { left: 0; }
+  .leaderboard-title { font-size: 1.5rem; }
+}
+
+/* ── Light mode — tone down grain + glow ─────────────────────── */
+[data-theme="light"] .leaderboard-page::before          { opacity: 0.10; }
+[data-theme="light"] .leaderboard-page .lb-row.rank-1   { box-shadow: inset 0 0 20px rgba(255,215,0,0.05), 0 0 12px rgba(255,215,0,0.10); }
+[data-theme="light"] .leaderboard-page .lb-score        { text-shadow: 0 0 6px var(--accent-glow); }
+[data-theme="light"] .leaderboard-page .lb-row:hover    { box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 18%, transparent) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RANK CHANGE ANIMATIONS (Steps 1–9 from rank-change request)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Step 3–4: Rank rise / fall entrance ─────────────────────── */
+.leaderboard-page .lb-row.rank-up {
+  animation: rankRise 0.45s ease forwards, rankUpFlash 0.7s ease forwards !important;
+}
+
+.leaderboard-page .lb-row.rank-down {
+  animation: rankRise 0.45s ease forwards, rankDownFlash 0.7s ease forwards !important;
+}
+
+@keyframes rankUpFlash {
+  0%   { transform: translateY(20px); background: rgba(34, 197, 94, 0.14); }
+  60%  {                              background: rgba(34, 197, 94, 0.08); }
+  100% { transform: translateY(0);   background: transparent; }
+}
+
+@keyframes rankDownFlash {
+  0%   { transform: translateY(-20px); background: rgba(239, 68, 68, 0.14); }
+  60%  {                                background: rgba(239, 68, 68, 0.08); }
+  100% { transform: translateY(0);     background: transparent; }
+}
+
+/* ── Step 5: Score flash ─────────────────────────────────────── */
+.leaderboard-page .lb-score.score-update {
+  animation: scoreFlash 0.9s ease forwards;
+}
+
+@keyframes scoreFlash {
+  0% {
+    color: #00eaff;
+    text-shadow: 0 0 12px rgba(0, 255, 255, 0.9), 0 0 24px rgba(0, 255, 255, 0.5);
+  }
+  100% {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+  }
+}
+
+/* ── Step 6: Rank direction arrows ───────────────────────────── */
+.lb-rank-cell {
+  display:     flex;
+  align-items: center;
+  gap:         4px;
+}
+
+.rank-indicator {
+  font-size:   0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  animation:   indicatorFade 0.95s ease forwards;
+  flex-shrink: 0;
+}
+
+.rank-indicator--up   { color: #22c55e; }
+.rank-indicator--down { color: #ef4444; }
+
+@keyframes indicatorFade {
+  0%   { opacity: 1; transform: translateY(0);    }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+/* ── Step 7: Current-user glow (augments existing .current-user) */
+.leaderboard-page .lb-row.current-user {
+  border-left: 3px solid var(--accent) !important;
+  box-shadow:
+    0 0 15px color-mix(in srgb, var(--accent) 22%, transparent),
+    inset 3px 0 12px color-mix(in srgb, var(--accent) 8%, transparent) !important;
+}
+
+/* ── Step 8: Smooth row transitions ──────────────────────────── */
+.leaderboard-page .lb-row {
+  transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+/* ── Light-mode softening for new glow rules ─────────────────── */
+[data-theme="light"] .leaderboard-page .lb-row.rank-up   { animation: rankUpFlashLight   0.7s ease forwards !important; }
+[data-theme="light"] .leaderboard-page .lb-row.rank-down { animation: rankDownFlashLight 0.7s ease forwards !important; }
+
+@keyframes rankUpFlashLight {
+  0%   { transform: translateY(20px);  background: rgba(34, 197, 94, 0.08); }
+  100% { transform: translateY(0);     background: transparent; }
+}
+
+@keyframes rankDownFlashLight {
+  0%   { transform: translateY(-20px); background: rgba(239, 68, 68, 0.08); }
+  100% { transform: translateY(0);     background: transparent; }
+}
+
+[data-theme="light"] .leaderboard-page .lb-score.score-update {
+  animation: scoreFlashLight 0.9s ease forwards;
+}
+
+@keyframes scoreFlashLight {
+  0%   { color: var(--accent-2); text-shadow: 0 0 8px var(--accent-glow); }
+  100% { color: var(--accent);   text-shadow: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CYBER CHAMPION SPOTLIGHT — #1 player only
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Step 2–3: Champion row base + glow ──────────────────────── */
+.leaderboard-page .lb-row.champion-row {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.13) 0%,
+    rgba(255, 215, 0, 0.05) 55%,
+    transparent 100%
+  ) !important;
+  border-top:    2px solid rgba(255, 215, 0, 0.70) !important;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.70) !important;
+  animation:
+    rankRise       0.45s ease forwards,
+    championGlow   3s   ease-in-out 0.45s infinite !important;
+}
+
+@keyframes championGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.40), inset 0 0 24px rgba(255, 215, 0, 0.06); }
+  50%       { box-shadow: 0 0 32px rgba(255, 215, 0, 0.80), inset 0 0 40px rgba(255, 215, 0, 0.12); }
+}
+
+/* ── Step 4: Sweeping spotlight beam ──────────────────────────── */
+.leaderboard-page .lb-row.champion-row::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 140px;
+  height: 300%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform: rotate(22deg);
+  animation: spotlightMove 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes spotlightMove {
+  0%   { left: -160px; opacity: 0;   }
+  8%   {               opacity: 1;   }
+  60%  {               opacity: 0.8; }
+  100% { left: 110%;   opacity: 0;   }
+}
+
+/* ── Step 5: Crown bounce ─────────────────────────────────────── */
+.champion-crown {
+  display: inline-block;
+  font-size: 1.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
+  animation: crownBounce 2s ease-in-out infinite;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+@keyframes crownBounce {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-4px); }
+}
+
+/* ── Step 6: Champion label badge ────────────────────────────── */
+.champion-label {
+  display:        inline-flex;
+  align-items:    center;
+  margin-left:    8px;
+  padding:        2px 7px;
+  border-radius:  4px;
+  background:     rgba(255, 215, 0, 0.90);
+  color:          #111;
+  font-size:      0.62rem;
+  font-weight:    800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-family:    var(--font-display);
+  line-height:    1.4;
+  flex-shrink:    0;
+  animation:      championLabelPulse 3s ease-in-out infinite;
+}
+
+@keyframes championLabelPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(255, 215, 0, 0.50); }
+  50%       { box-shadow: 0 0 12px rgba(255, 215, 0, 0.90); }
+}
+
+/* ── Step 7: Champion score glow ──────────────────────────────── */
+.leaderboard-page .lb-row.champion-row .lb-score {
+  color:       #ffd700 !important;
+  text-shadow:
+    0 0 8px  rgba(255, 215, 0, 0.80),
+    0 0 20px rgba(255, 215, 0, 0.50);
+  animation: championScorePulse 3s ease-in-out infinite;
+}
+
+@keyframes championScorePulse {
+  0%, 100% { text-shadow: 0 0  8px rgba(255,215,0,0.80), 0 0 20px rgba(255,215,0,0.50); }
+  50%       { text-shadow: 0 0 16px rgba(255,215,0,1.00), 0 0 36px rgba(255,215,0,0.80); }
+}
+
+/* ── Step 8: Celebration flash (fires when rank-up + champion) ── */
+.leaderboard-page .lb-row.champion-row.rank-up {
+  animation:
+    rankRise          0.45s ease forwards,
+    championFlash     1s    ease forwards,
+    championGlow      3s    ease-in-out 1s infinite !important;
+}
+
+@keyframes championFlash {
+  0%   { background: rgba(255, 215, 0, 0.45) !important; }
+  100% { background: rgba(255, 215, 0, 0.10) !important; }
+}
+
+/* ── Light-mode softening ─────────────────────────────────────── */
+[data-theme="light"] .leaderboard-page .lb-row.champion-row {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.09) 0%,
+    transparent 60%
+  ) !important;
+}
+
+[data-theme="light"] .leaderboard-page .lb-row.champion-row::after {
+  background: linear-gradient(to bottom, transparent, rgba(255,215,0,0.14), transparent);
+}
+
+[data-theme="light"] .champion-label {
+  background: rgba(255, 215, 0, 0.75);
+}
+
+[data-theme="light"] .leaderboard-page .lb-row.champion-row .lb-score {
+  color: #b8860b !important;
+  text-shadow: 0 0 6px rgba(184,134,11,0.50);
+}

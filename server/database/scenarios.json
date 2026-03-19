@@ -1,0 +1,647 @@
+[
+  {
+    "title": "The Suspicious HR Email",
+    "description": "An email arrives from what appears to be your HR department. Your decision matters.",
+    "category": "phishing",
+    "difficulty": "easy",
+    "maxScore": 60,
+    "isActive": true,
+    "steps": [
+      {
+        "title": "Incoming Email",
+        "question": "You have received this email. What is your immediate response?",
+        "type": "email",
+        "emailData": {
+          "from": "hr-noreply@cornpany-hr.com",
+          "to": "you@yourcompany.com",
+          "subject": "URGENT: Verify Your Payroll Details Immediately",
+          "body": "Dear Employee,\n\nOur payroll system has been updated. To ensure your salary is processed correctly this month, you MUST verify your bank details within 24 hours.\n\nClick the link below to update your information:\nhttp://payroll-verify.cornpany-hr.com/update\n\nFailure to update will result in delayed payment.\n\nHR Department"
+        },
+        "choices": [
+          {
+            "text": "Click the link immediately — I don't want to miss my salary!",
+            "isCorrect": false,
+            "explanation": "DANGER! This is a classic phishing attack. 'cornpany-hr.com' is NOT your company domain. Legitimate HR departments never ask for sensitive info via email links under time pressure.",
+            "points": 0
+          },
+          {
+            "text": "Check the sender's email domain carefully before clicking anything",
+            "isCorrect": true,
+            "explanation": "Excellent! The domain 'cornpany-hr.com' uses 'n' instead of 'm' — a classic typosquatting technique. Always verify sender domains before clicking links.",
+            "points": 20
+          },
+          {
+            "text": "Forward it to everyone in the office to warn them",
+            "isCorrect": false,
+            "explanation": "Well-intentioned but risky! Forwarding phishing emails can spread the threat. Instead, report it to your IT/security team directly.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Identifying Red Flags",
+        "question": "You've noticed the domain looks suspicious. What other red flags exist in this email?",
+        "type": "text",
+        "description": "You've noticed the domain looks suspicious. What other red flags exist in this email?",
+        "choices": [
+          {
+            "text": "The urgency ('URGENT', '24 hours', 'delayed payment') is a pressure tactic",
+            "isCorrect": true,
+            "explanation": "Correct! Creating artificial urgency is a hallmark of phishing. Attackers want you to act before you think. Legitimate companies don't threaten you over email.",
+            "points": 20
+          },
+          {
+            "text": "The grammar is perfect, so it must be legitimate",
+            "isCorrect": false,
+            "explanation": "Modern phishing emails often have good grammar. Red flags here include: fake domain, urgent tone, generic greeting ('Dear Employee'), and suspicious link.",
+            "points": 0
+          },
+          {
+            "text": "There's nothing suspicious, HR emails always look like this",
+            "isCorrect": false,
+            "explanation": "This is exactly what attackers want you to think! Multiple red flags: typosquatted domain, extreme urgency, request for sensitive data via link.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Correct Action",
+        "question": "You've confirmed this is phishing. What is the BEST course of action now?",
+        "type": "text",
+        "description": "You've confirmed this is likely phishing. What is the BEST course of action now?",
+        "choices": [
+          {
+            "text": "Delete the email and forget about it",
+            "isCorrect": false,
+            "explanation": "Deleting removes the threat from you, but others may receive it. Reporting helps protect your entire organization.",
+            "points": 0
+          },
+          {
+            "text": "Report the email to your IT/Security team and mark it as phishing",
+            "isCorrect": true,
+            "explanation": "Perfect response! Reporting phishing emails helps your organization block the sender, warn other employees, and improve security filters.",
+            "points": 20
+          },
+          {
+            "text": "Reply asking the sender to prove their identity",
+            "isCorrect": false,
+            "explanation": "Never engage with phishing senders. Replying confirms your email is active, potentially leading to more targeted attacks.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "The Fake Bank Login",
+    "description": "You receive a text saying your bank account has been locked. A website link is provided.",
+    "category": "fake-login",
+    "difficulty": "medium",
+    "maxScore": 80,
+    "steps": [
+      {
+        "title": "Suspicious Website",
+        "question": "You've been directed to this login page. Analyze it carefully — what do you do?",
+        "type": "browser",
+        "browserData": {
+          "url": "http://secure-bankofindian.login-verify.com/account",
+          "siteName": "Bank of Indian — Secure Login",
+          "description": "Your account has been temporarily locked for security reasons. Please enter your credentials to restore access.",
+          "formFields": [
+            { "label": "Customer ID", "placeholder": "Enter your Customer ID" },
+            { "label": "Password", "placeholder": "Enter your Net Banking Password" },
+            { "label": "OTP", "placeholder": "Enter OTP received on mobile" }
+          ],
+          "submitLabel": "Unlock Account"
+        },
+        "choices": [
+          {
+            "text": "Enter my credentials — my account is locked and I need access!",
+            "isCorrect": false,
+            "explanation": "CRITICAL ERROR! This is a fake login page. The URL 'login-verify.com' is not your bank's domain. Entering credentials here gives attackers full account access.",
+            "points": 0
+          },
+          {
+            "text": "Analyze the URL — it doesn't match my bank's official domain",
+            "isCorrect": true,
+            "explanation": "Excellent security thinking! Your real bank URL would be something like 'netbanking.bankofindia.co.in'. The URL 'login-verify.com' is a giveaway of a fake site.",
+            "points": 20
+          },
+          {
+            "text": "The site looks exactly like my bank, so it must be real",
+            "isCorrect": false,
+            "explanation": "Appearance is deceiving! Attackers copy real bank websites pixel-perfectly. The ONLY reliable indicator is the URL in the address bar.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "URL Analysis",
+        "question": "Analyzing the URL: http://secure-bankofindian.login-verify.com/account — which aspect is most alarming?",
+        "type": "text",
+        "description": "You're analyzing the URL: http://secure-bankofindian.login-verify.com/account\n\nWhich aspect is most alarming?",
+        "choices": [
+          {
+            "text": "It uses HTTP instead of HTTPS — no encryption",
+            "isCorrect": true,
+            "explanation": "Critical red flag! Legitimate banking sites ALWAYS use HTTPS (look for the padlock). HTTP means data is transmitted unencrypted. But even HTTPS doesn't guarantee legitimacy.",
+            "points": 20
+          },
+          {
+            "text": "The word 'secure' in the URL makes it trustworthy",
+            "isCorrect": false,
+            "explanation": "The word 'secure' in a URL means nothing — anyone can put it there. Focus on the actual domain name after the last dot before the path.",
+            "points": 0
+          },
+          {
+            "text": "URLs are too technical to analyze, just trust the site design",
+            "isCorrect": false,
+            "explanation": "URL analysis is your primary defense against fake sites. The actual domain (login-verify.com) reveals this is NOT a bank website.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Verification Steps",
+        "question": "How should you verify if your bank account is actually locked?",
+        "type": "text",
+        "description": "How should you verify if your bank account is actually locked?",
+        "choices": [
+          {
+            "text": "Call your bank's official helpline or visit the branch directly",
+            "isCorrect": true,
+            "explanation": "Best practice! Always use contact information from your bank's official card, statement, or official website (typed manually). Never trust links from texts or emails.",
+            "points": 20
+          },
+          {
+            "text": "Google your bank and click the first result to check",
+            "isCorrect": false,
+            "explanation": "Slightly better, but search results can include paid ads leading to fake sites. Type your bank's official URL directly in the address bar.",
+            "points": 0
+          },
+          {
+            "text": "Try to log in anyway — if it's fake, nothing bad will happen",
+            "isCorrect": false,
+            "explanation": "Something very bad will happen! Submitting credentials to a phishing site gives attackers immediate access to harvest your banking details.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Protecting Others",
+        "question": "After identifying this as a fake banking site, what is the most responsible action?",
+        "type": "text",
+        "description": "After identifying this as a fake banking site, what's the most responsible action?",
+        "choices": [
+          {
+            "text": "Report the URL to your bank's official fraud department and to CERT-In",
+            "isCorrect": true,
+            "explanation": "Perfect! Reporting to your bank and India's CERT-In (Cyber Emergency Response Team) helps take down malicious sites and protect others from becoming victims.",
+            "points": 20
+          },
+          {
+            "text": "Share the link on social media to warn people",
+            "isCorrect": false,
+            "explanation": "Sharing the link can inadvertently spread it further. Report to authorities instead — they can investigate and take the site down.",
+            "points": 0
+          },
+          {
+            "text": "Nothing — I already didn't enter my details, so I'm safe",
+            "isCorrect": false,
+            "explanation": "You're safe, but others aren't! The attackers are actively targeting people. Reporting can prevent the site from victimizing others.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "The IT Support Impersonator",
+    "description": "Someone calls claiming to be from IT support and needs your help. A social engineering scenario.",
+    "category": "social-engineering",
+    "difficulty": "medium",
+    "maxScore": 60,
+    "steps": [
+      {
+        "title": "The Phone Call",
+        "question": "Someone claiming to be IT Support asks you to confirm your password. How do you respond?",
+        "type": "text",
+        "description": "You receive a call:\n\n\"Hi, this is Rahul from IT Support. We've detected unusual login activity on your account from an unknown location. I need to verify your identity to secure your account. Can you please confirm your employee ID and current password so I can lock out the attacker?\"\n\nHow do you respond?",
+        "choices": [
+          {
+            "text": "Give them the information — they're from IT and sound official!",
+            "isCorrect": false,
+            "explanation": "NEVER share passwords over phone/email — not even with IT! Legitimate IT support will NEVER ask for your password. They have admin tools to manage accounts without needing it.",
+            "points": 0
+          },
+          {
+            "text": "Refuse to provide your password, then call IT through the official company directory to verify",
+            "isCorrect": true,
+            "explanation": "Perfect response! Your password is yours alone. Hang up and call your IT department using the number from your company's internal directory — never the number the caller provides.",
+            "points": 20
+          },
+          {
+            "text": "Ask them to send an email first to verify they're really from IT",
+            "isCorrect": false,
+            "explanation": "Better than complying, but not enough. A sophisticated attacker may have access to a spoofed email address. Always verify through official channels independently.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Psychological Pressure",
+        "question": "The caller is now applying extreme urgency and pressure. How do you respond?",
+        "type": "text",
+        "description": "The caller escalates: \"I don't have time for this. The attacker is actively in your account RIGHT NOW. Every second you delay puts company data at risk. I need your password NOW or your account will be permanently compromised.\"\n\nHow do you respond to this pressure?",
+        "choices": [
+          {
+            "text": "Give the password — the urgency sounds real and data could be at risk",
+            "isCorrect": false,
+            "explanation": "This is a classic social engineering technique called 'urgency manipulation.' Real IT security teams have tools to immediately lock accounts without needing your password.",
+            "points": 0
+          },
+          {
+            "text": "Stay calm — the pressure itself is a red flag. Firmly decline and hang up.",
+            "isCorrect": true,
+            "explanation": "Excellent! Artificial urgency is the attacker's primary tool. Real security professionals don't panic or pressure you. Calmly saying 'I need to verify through official channels' and hanging up is correct.",
+            "points": 20
+          },
+          {
+            "text": "Give them a fake password to waste their time",
+            "isCorrect": false,
+            "explanation": "Clever thinking, but dangerous! Engaging with the attacker extends the interaction and may give them more information or opportunities to manipulate you further.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "After the Call",
+        "question": "You've hung up on the suspicious caller. What do you do next?",
+        "type": "text",
+        "description": "You hung up. The call was suspicious. What's your next step?",
+        "choices": [
+          {
+            "text": "Report the incident to your real IT security team and change your password proactively",
+            "isCorrect": true,
+            "explanation": "Excellent! Report immediately — your IT team needs to know this attack is happening. Changing your password as a precaution is also good practice, especially if you felt pressured during the call.",
+            "points": 20
+          },
+          {
+            "text": "Do nothing — you didn't give any information so you're fine",
+            "isCorrect": false,
+            "explanation": "Reporting is important even if you didn't fall for it! Your IT team can warn others, investigate the attack, and potentially identify the caller.",
+            "points": 0
+          },
+          {
+            "text": "Call the number back and confront the attacker",
+            "isCorrect": false,
+            "explanation": "Never engage further! Calling back can confirm your number is active and may expose you to further manipulation. Report to IT instead.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "The Prize Winner Scam",
+    "description": "You receive an exciting notification that you've won a major prize. Is it real?",
+    "category": "phishing",
+    "difficulty": "easy",
+    "maxScore": 60,
+    "steps": [
+      {
+        "title": "Prize Email",
+        "question": "You've received this email claiming you've won a prize. What do you do?",
+        "type": "email",
+        "emailData": {
+          "from": "prizes@amazon-winners-2024.net",
+          "to": "you@email.com",
+          "subject": "🎉 CONGRATULATIONS! You've Won ₹5,00,000 Amazon Gift Card!",
+          "body": "DEAR VALUED CUSTOMER,\n\nYou have been SELECTED as our LUCKY WINNER in the Amazon Annual Customer Appreciation Program 2024!\n\nYour Prize: ₹5,00,000 Amazon Gift Card\n\nTo CLAIM your prize:\n1. Click here: http://amazon-prize-claim.net/claim\n2. Pay a small processing fee of ₹499\n3. Receive your prize within 24 hours!\n\nOffer expires in: 02:30:00\n\nCongratulations again!\nAmazon Prize Team"
+        },
+        "choices": [
+          {
+            "text": "Click the link and pay the ₹499 processing fee — ₹5 lakh is worth it!",
+            "isCorrect": false,
+            "explanation": "This is an advance fee fraud! You'll pay ₹499 (or more) and receive nothing. Amazon does not run unsolicited prize programs via email or charge fees to claim prizes.",
+            "points": 0
+          },
+          {
+            "text": "This is clearly a scam — multiple red flags including paying to receive a prize",
+            "isCorrect": true,
+            "explanation": "Absolutely correct! Key red flags: fake domain (amazon-winners-2024.net), paying to receive a prize (advance fee fraud), artificial countdown timer, unsolicited 'winning', excessive caps and exclamation marks.",
+            "points": 20
+          },
+          {
+            "text": "Forward it to Amazon's customer service asking if it's real",
+            "isCorrect": false,
+            "explanation": "Better than clicking, but you can identify this as fraudulent without verification. Report to Amazon's phishing team (stop-spoofing@amazon.com) and your email provider.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "The Fee Trap",
+        "question": "Your friend argues the \u20b9499 fee is worth the risk for a \u20b95 lakh prize. How do you explain why it's still wrong?",
+        "type": "text",
+        "description": "Your friend says 'But it only asks for ₹499, and you could win ₹5 lakh. Isn't it worth the risk?'\n\nHow do you explain why this is still wrong?",
+        "choices": [
+          {
+            "text": "Maybe my friend is right — the potential gain outweighs a small fee",
+            "isCorrect": false,
+            "explanation": "This is exactly the psychological trap! In advance fee scams, the 'small fee' keeps growing with new excuses. No legitimate prize requires payment to claim.",
+            "points": 0
+          },
+          {
+            "text": "Legitimate prizes NEVER require upfront payment. If you pay, you'll lose that money with nothing in return.",
+            "isCorrect": true,
+            "explanation": "Precisely! This is called 'advance fee fraud.' Once you pay ₹499, they'll request more fees ('customs', 'tax', 'insurance'). The prize never materializes. Real prizes deduct fees from winnings.",
+            "points": 20
+          },
+          {
+            "text": "Just pay and if nothing comes, file a police complaint",
+            "isCorrect": false,
+            "explanation": "Recovering money from online fraud is extremely difficult. Prevention is far better. Scammers use anonymous payment methods and operate across jurisdictions.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Protecting Vulnerable People",
+        "question": "Your elderly parent received the same email and is excited about winning. What do you do?",
+        "type": "text",
+        "description": "Your elderly parent received the same email and is excited about winning. What do you do?",
+        "choices": [
+          {
+            "text": "Let them decide — it's their money and their choice",
+            "isCorrect": false,
+            "explanation": "Elderly individuals are disproportionately targeted by scammers. Gently explaining the scam, showing the red flags, and helping them report it is the caring response.",
+            "points": 0
+          },
+          {
+            "text": "Calmly explain the red flags, show them why it's a scam, and help report it together",
+            "isCorrect": true,
+            "explanation": "Perfect! Educating vulnerable family members is crucial. Scammers target those who may be less familiar with digital fraud. Report to the cybercrime portal (cybercrime.gov.in) together.",
+            "points": 20
+          },
+          {
+            "text": "Just delete the email from their device without telling them",
+            "isCorrect": false,
+            "explanation": "Deleting without explaining leaves them vulnerable to future scams. Teaching them to recognize red flags is more protective long-term.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Ransomware Attack Chain",
+    "description": "Your organization is under a sophisticated ransomware attack. Track every stage and make critical decisions.",
+    "category": "ransomware",
+    "difficulty": "hard",
+    "maxScore": 100,
+    "steps": [
+      {
+        "title": "Initial Vector: Malicious Attachment",
+        "question": "Your accounts team has received this email with an invoice attachment. What should happen next?",
+        "type": "email",
+        "emailData": {
+          "from": "invoice@legitimate-vendor.com",
+          "to": "accounts@yourcompany.com",
+          "subject": "Invoice #INV-2024-8892 — Payment Due",
+          "body": "Dear Accounts Team,\n\nPlease find attached Invoice #INV-2024-8892 for services rendered in November.\n\nPayment due: December 15, 2024\nAmount: ₹1,45,000\n\nPlease review the attached document for full breakdown.\n\nBest regards,\nRajesh Kumar\nAccounts, Vendor Solutions Ltd."
+        },
+        "choices": [
+          {
+            "text": "Open the attached document — it looks like a regular invoice",
+            "isCorrect": false,
+            "explanation": "This is a spear-phishing attack. The email appears legitimate but the attachment contains a macro-enabled document that deploys ransomware. Always verify attachments from vendors through secondary communication.",
+            "points": 0
+          },
+          {
+            "text": "Before opening, verify the invoice with the vendor via a separate phone call",
+            "isCorrect": true,
+            "explanation": "Excellent protocol! Business email compromise (BEC) attacks often spoof vendor emails. Calling the vendor using a number from your records (not from the email) before opening attachments prevents ransomware deployment.",
+            "points": 20
+          },
+          {
+            "text": "Forward to IT to scan the attachment first",
+            "isCorrect": true,
+            "explanation": "Good practice! Having IT scan attachments is a valid security measure. However, sophisticated ransomware can evade basic scans, so verification via phone is also essential.",
+            "points": 20
+          }
+        ]
+      },
+      {
+        "title": "Ransomware Deployed",
+        "question": "Ransomware has deployed and a ransom demand has appeared. What is your IMMEDIATE first action?",
+        "type": "text",
+        "description": "Despite precautions, ransomware has been deployed on one workstation. Files are being encrypted. A ransom note appears:\n\n'Your files are encrypted. Pay 2 Bitcoin to [address] within 72 hours or all data will be permanently deleted and leaked.'\n\nWhat is your IMMEDIATE first action?",
+        "choices": [
+          {
+            "text": "Immediately disconnect the infected machine from the network (unplug ethernet/disable WiFi)",
+            "isCorrect": true,
+            "explanation": "CRITICAL first step! Network isolation prevents ransomware from spreading to other machines, servers, and backups. Every second connected = more systems potentially infected.",
+            "points": 20
+          },
+          {
+            "text": "Pay the ransom immediately to recover files quickly",
+            "isCorrect": false,
+            "explanation": "Never pay without guidance! Paying doesn't guarantee file recovery, funds criminal operations, and marks your org as a 'payer' for future attacks. Consult cybersecurity experts first.",
+            "points": 0
+          },
+          {
+            "text": "Try to find and delete the ransomware files manually",
+            "isCorrect": false,
+            "explanation": "This wastes critical time and may not work. The ransomware has already run. Isolation is priority #1, then follow your incident response plan.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Containment and Assessment",
+        "question": "The infected machine is isolated. What is the next priority?",
+        "type": "text",
+        "description": "The machine is isolated. What's the next priority?",
+        "choices": [
+          {
+            "text": "Activate your incident response plan, contact cybersecurity experts, and assess which systems are affected",
+            "isCorrect": true,
+            "explanation": "Correct incident response sequence! IR plans exist for exactly this. Experts can assess blast radius, identify the ransomware variant, check for exfiltration, and guide recovery using backups.",
+            "points": 20
+          },
+          {
+            "text": "Immediately restore from backup to get systems working",
+            "isCorrect": false,
+            "explanation": "Restoring too quickly can reintroduce the attack vector. First establish: how did it get in, is the entry point patched, are backups clean, what else was compromised.",
+            "points": 0
+          },
+          {
+            "text": "Inform all employees via company-wide email about the attack",
+            "isCorrect": false,
+            "explanation": "Mass notifications can cause panic and may alert attackers (if they have email access) that they've been detected. Controlled communication through secure channels is essential.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Prevention Lesson",
+        "question": "After recovery, your CISO asks what should have prevented this. What is the most impactful answer?",
+        "type": "text",
+        "description": "After recovery, your CISO asks what should have prevented this. What's the most impactful answer?",
+        "choices": [
+          {
+            "text": "Regular offline backups, email security training, least-privilege access, and tested incident response plans",
+            "isCorrect": true,
+            "explanation": "Comprehensive answer! These four pillars form ransomware defense: (1) Backups ensure recovery, (2) Training prevents initial infection, (3) Least-privilege limits blast radius, (4) IR plans enable fast response.",
+            "points": 20
+          },
+          {
+            "text": "Just buy better antivirus software",
+            "isCorrect": false,
+            "explanation": "Antivirus is one layer but insufficient alone. Modern ransomware evades detection. Defense-in-depth (multiple security layers) is required, with human training being the most critical.",
+            "points": 0
+          },
+          {
+            "text": "Never open any emails from external senders",
+            "isCorrect": false,
+            "explanation": "Impractical for businesses. The solution is proper email security controls (sandboxing, SPF/DKIM/DMARC), employee training, and verification procedures for sensitive actions.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Legal and Ethical Obligations",
+        "question": "Customer data may have been stolen during the attack. What are your legal and ethical obligations?",
+        "type": "text",
+        "description": "Customer data may have been exfiltrated during the attack. What are your obligations?",
+        "choices": [
+          {
+            "text": "Report the breach to affected customers and relevant authorities as required by law",
+            "isCorrect": true,
+            "explanation": "Correct! Data breach notification is legally required in India under IT Act and emerging DPDP Act. Timely, transparent notification builds trust and is an ethical obligation to affected individuals.",
+            "points": 20
+          },
+          {
+            "text": "Keep it quiet to avoid reputational damage",
+            "isCorrect": false,
+            "explanation": "Concealing a breach is illegal and deeply unethical. Victims cannot protect themselves (change passwords, freeze accounts) without notification. Cover-ups cause far greater reputational damage when discovered.",
+            "points": 0
+          },
+          {
+            "text": "Wait to see if any data actually gets leaked before notifying anyone",
+            "isCorrect": false,
+            "explanation": "Waiting exposes affected individuals to ongoing harm. Legal notification requirements typically have specific timeframes. Proactive notification is always the right approach.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Advanced Ransomware: Lateral Movement",
+    "description": "An attacker gains a foothold through spear-phishing and attempts lateral movement across internal systems. React to each stage of a live incident.",
+    "category": "ransomware",
+    "difficulty": "expert",
+    "maxScore": 60,
+    "isActive": true,
+    "steps": [
+      {
+        "title": "Initial Compromise Detected",
+        "question": "A user reports severe system slowdown after opening a suspicious attachment. What is the first indicator of compromise and your immediate action?",
+        "type": "text",
+        "description": "A user reports severe system slowdown after opening a suspicious email attachment. Security alerts are firing. What is the correct first step?",
+        "choices": [
+          {
+            "text": "Ignore the complaint — it is probably just normal slowdown",
+            "isCorrect": false,
+            "feedback": "Ignoring the report allows the attacker to spread further. Every minute of inaction during an active incident increases blast radius significantly.",
+            "points": 0
+          },
+          {
+            "text": "Immediately isolate the device by disconnecting it from the network",
+            "isCorrect": true,
+            "feedback": "Correct. Network isolation is always the first step. Cutting the infected machine off prevents ransomware from encrypting shared drives and spreading laterally to other hosts.",
+            "points": 20
+          },
+          {
+            "text": "Restart the system to clear the infection",
+            "isCorrect": false,
+            "feedback": "Restarting does not remove ransomware and wastes critical containment time. Some ransomware variants are designed to complete encryption faster after a reboot.",
+            "points": 0
+          },
+          {
+            "text": "Disable antivirus so it stops slowing the system down",
+            "isCorrect": false,
+            "feedback": "Disabling antivirus actively assists the attacker. This is exactly what many ransomware variants attempt to do automatically.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Credential Reuse Attack",
+        "question": "The attacker is now attempting to reuse stolen credentials to pivot into other internal systems. How do you stop lateral movement?",
+        "type": "text",
+        "description": "Forensic analysis shows the attacker exfiltrated a credential cache from the compromised machine and is now attempting to log in to other internal servers using those credentials.",
+        "choices": [
+          {
+            "text": "Force-reset all passwords company-wide and enforce MFA on every account immediately",
+            "isCorrect": true,
+            "feedback": "Correct. Credential invalidation cuts off the attacker's pivot paths. Combined with MFA enforcement, this prevents reuse even if additional credentials were captured.",
+            "points": 20
+          },
+          {
+            "text": "Wait and monitor — see how far the attacker gets before responding",
+            "isCorrect": false,
+            "feedback": "Passive monitoring during active lateral movement is extremely dangerous. Every additional system compromised increases recovery time and data loss exponentially.",
+            "points": 0
+          },
+          {
+            "text": "Shut down all servers to stop the attacker",
+            "isCorrect": false,
+            "feedback": "A complete shutdown is disruptive and unnecessary. Targeted isolation of affected segments and credential resets are far more surgical and effective.",
+            "points": 0
+          },
+          {
+            "text": "Send an email to the attacker warning them to stop",
+            "isCorrect": false,
+            "feedback": "This would alert the attacker that they've been detected, causing them to accelerate their timeline or destroy evidence before leaving.",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "title": "Post-Incident Hardening",
+        "question": "The incident has been contained. What is the most critical hardening action to prevent the same attack vector from being used again?",
+        "type": "text",
+        "description": "The ransomware has been contained and systems are being restored from clean backups. The CISO now asks for the most impactful single hardening measure to prevent recurrence.",
+        "choices": [
+          {
+            "text": "Implement network segmentation so credential compromise cannot enable cross-segment lateral movement",
+            "isCorrect": true,
+            "feedback": "Excellent. Network segmentation is the structural fix. It means a compromised credential in one segment cannot automatically be used to access high-value systems in another — breaking the lateral movement chain permanently.",
+            "points": 20
+          },
+          {
+            "text": "Buy a more expensive firewall",
+            "isCorrect": false,
+            "feedback": "Hardware alone does not prevent credential-based lateral movement inside the network perimeter. Architecture and access control are the root fix.",
+            "points": 0
+          },
+          {
+            "text": "Tell employees to be more careful with emails",
+            "isCorrect": false,
+            "feedback": "Training is valuable but not sufficient as the primary hardening measure. Technical controls (segmentation, MFA, least-privilege) must accompany awareness programs.",
+            "points": 0
+          },
+          {
+            "text": "Change only the admin password",
+            "isCorrect": false,
+            "feedback": "Changing only one password leaves all other compromised credentials active. A full credential rotation plus structural hardening is required.",
+            "points": 0
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CANONICAL THEME VARIABLES — single source of truth
+   All components should prefer these over file-local vars.
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --bg:             #f4f7fb;   /* Page background           */
+  --surface:        #ffffff;   /* Main panel / content area */
+  --card:           #ffffff;   /* Card background           */
+  --border:         #e2e8f0;   /* Borders & dividers        */
+
+  --text-primary:   #0f172a;   /* Headings, labels          */
+  --text-secondary: #475569;   /* Subtitles, descriptions   */
+  --text-dim:       #6b7280;   /* Metadata, timestamps      */
+
+  --accent:         #4f46e5;   /* Primary accent (indigo)   */
+  --accent-2:       #06b6d4;   /* Secondary accent (cyan)   */
+  --accent-glow:    rgba(79, 70, 229, 0.25);
+
+  --danger:         #dc2626;
+  --success:        #22c55e;
+  --warning:        #f59e0b;
+
+  /* Ambient effect intensities */
+  --grid-color:    rgba(79, 70, 229, 0.05);
+  --scan-color:    rgba(79, 70, 229, 0.40);
+
+  /* Attack map */
+  --map-bg:          #dbeafe;
+  --map-land:        #bfdbfe;
+  --map-land-hover:  #93c5fd;
+  --map-border:      #94a3b8;
+
+  /* Neural network background */
+  --network-node:    rgba(99, 102, 241, 0.70);
+  --network-line:    rgba(99, 102, 241, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg:             #020617;   /* Deep navy base            */
+  --surface:        #050b18;   /* Main panel background     */
+  --card:           #0b1220;   /* Card background           */
+  --border:         #1e293b;   /* Borders & dividers        */
+
+  --text-primary:   #ffffff;   /* PURE WHITE                */
+  --text-secondary: #cbd5e1;   /* Soft bright gray          */
+  --text-dim:       #a0b3c6;   /* Dimmed labels — still readable */
+
+  --accent:         #00f5ff;   /* Neon cyan                 */
+  --accent-2:       #ff00c8;   /* Neon pink                 */
+  --accent-glow:    rgba(0, 245, 255, 0.35);
+
+  --danger:         #ff4d4d;
+  --success:        #4ade80;
+  --warning:        #fbbf24;
+
+  /* Ambient effect intensities */
+  --grid-color:    rgba(0, 245, 255, 0.025);
+  --scan-color:    rgba(0, 245, 255, 0.60);
+
+  /* Attack map */
+  --map-bg:          #020617;
+  --map-land:        #0b1e36;
+  --map-land-hover:  #0f2a4a;
+  --map-border:      #1e3a5f;
+
+  /* Neural network background */
+  --network-node:    rgba(0, 245, 255, 0.75);
+  --network-line:    rgba(0, 245, 255, 0.15);
+}
+
+/* ── Global base styles ──────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ── Global animated cyber grid (all pages) ────────────────── */
+
+@keyframes globalGridScroll {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 56px 56px, 56px 56px; }
+}
+
+@keyframes globalParticleDrift {
+  0%   { transform: translateY(0);    opacity: 1; }
+  100% { transform: translateY(-50px); opacity: 0.6; }
+}
+
+/* Layer 1: fine scrolling grid — sits below all app content */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: globalGridScroll 18s linear infinite;
+}
+
+/* Layer 2: four glowing node particles that drift upward */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, var(--accent)     2px, transparent 2px),
+    radial-gradient(circle, var(--accent-2)   2px, transparent 2px),
+    radial-gradient(circle, var(--accent)     1.5px, transparent 1.5px),
+    radial-gradient(circle, var(--accent-2)   1.5px, transparent 1.5px);
+  background-position:
+    18% 35%,
+    65% 72%,
+    82% 18%,
+    42% 88%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.30;
+  animation: globalParticleDrift 22s ease-in-out infinite alternate;
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* ── Neural network background canvas ───────────────────── */
+.cyber-network-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cyber-network-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
